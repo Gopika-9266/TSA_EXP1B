@@ -70,9 +70,9 @@ SEASONAL ADJUSTMENT:
 LOG TRANSFORMATION:
 ![exp1b-img5](https://github.com/user-attachments/assets/86270cdf-e9e9-482d-ab99-d3699785012d)
 
-Combined Graph:
-![exp1b-img6](https://github.com/user-attachments/assets/cde9a884-42f5-404e-ad90-a270b3280a53)
+COMBINED GRAPH:
 
+![exp1b-img6](https://github.com/user-attachments/assets/f79b1ce3-13eb-4231-9d19-1a16ea696211)
 
 ### RESULT:
 Thus we have created the python code for the conversion of non stationary to stationary data on international airline passenger
