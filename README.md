@@ -6,7 +6,7 @@
 
 ### AIM:
 
-To perform regular differncing,seasonal adjustment and log transformatio on international airline passenger data
+To perform regular differencing,seasonal adjustment and log transformation on international airline passenger data.
 
 ### ALGORITHM:
 
@@ -60,14 +60,17 @@ train['#Passengers_log_diff'].dropna().plot()
 
 
 REGULAR DIFFERENCING:
+
 ![exp1b-img3](https://github.com/user-attachments/assets/d0a1290c-acfd-4c98-8d1c-03cbdb8c997a)
 
 
 SEASONAL ADJUSTMENT:
+
 ![exp1b-img4](https://github.com/user-attachments/assets/fc6af112-68f6-4d1d-909a-d596208b4b9d)
 
 
 LOG TRANSFORMATION:
+
 ![exp1b-img5](https://github.com/user-attachments/assets/86270cdf-e9e9-482d-ab99-d3699785012d)
 
 COMBINED GRAPH:
