@@ -6,7 +6,7 @@
 
 ### AIM:
 
-To perform regular differencing,seasonal adjustment and log transformation on international airline passenger data.
+To perform regular differencing,seasonal adjustment and log transformation on tesla stock prediction
 
 ### ALGORITHM:
 
@@ -24,59 +24,82 @@ import matplotlib.pyplot as plt
 from statsmodels.tsa.stattools import adfuller
 %matplotlib inline
 
-train = pd.read_csv("AirPassengers.csv")
-train.timestamp = pd.to_datetime(train.Month, format = '%Y-%m')
-train.drop('Month', axis=1, inplace = True)
+#reading the dataset
+train = pd.read_csv('tsla_2014_2023 (1).csv')
+
+#preprocessing
+train.timestamp = pd.to_datetime(train["date"])
+train.index = train.timestamp
+train.drop('date',axis = 1, inplace = True)
+
+#looking at the first few rows
 train.head()
-train['#Passengers'].plot()
+train['open'].plot()
 
+from statsmodels.tsa.stattools import adfuller
 def adf_test(timeseries):
-    print('Results of Dickey-Fuller Test:')
+    #Perform Dickey-Fuller test:
+    print ('Results of Dickey-Fuller Test:')
     dftest = adfuller(timeseries, autolag='AIC')
-    dfoutput = pd.Series(dftest[0:4], index=['Test Statistic', 'p-value', '#Lags Used', 'Number of Observations Used'])
-    for key, value in dftest[4].items():
-        dfoutput['Critical Value (%s)' % key] = value
-    print(dfoutput)
-adf_test(train['#Passengers'])
+    dfoutput = pd.Series(dftest[0:4], index=['Test Statistic','p-value','#Lags Used','Number of Observations Used'])
+    for key,value in dftest[4].items():
+       dfoutput['Critical Value (%s)'%key] = value
+    print (dfoutput)
 
-train['#Passengers_diff'] = train['#Passengers'] - train['#Passengers'].shift(1)
-train['#Passengers_diff'].dropna().plot()
+adf_test(train['open'])
+
+train['open_diff'] = train['open'] - train['open'].shift(1)
+train['open'].dropna().plot()
+
 # Seasonal Differencing
 n=7
-train['#Passengers_diff'] = train['#Passengers'] - train['#Passengers'].shift(n)
-train['#Passengers_diff'].dropna().plot()
+train['open_diff'] = train['open'] - train['open'].shift(n)
+train['open_diff'].dropna().plot()
+
 # Transformation
-train['#Passengers_log'] = np.log(train['#Passengers'])
-train['#Passengers_log_diff'] = train['#Passengers_log'] - train['#Passengers_log'].shift(1)
-train['#Passengers_log_diff'].dropna().plot()
+train['open_log'] = np.log(train['open'])
+train['open_log_diff'] = train['open_log'] - train['open_log'].shift(1)
+train['open_log_diff'].dropna().plot()
+
+
+# Combined Graph
+# Seasonal Differencing
+n=7
+train['open_diff'] = train['open'] - train['open'].shift(n)
+train['open_diff'].dropna().plot()
+
+# Transformation
+train['open_log'] = np.log(train['open'])
+train['open_log_diff'] = train['open_log'] - train['open_log'].shift(1)
+train['open_log_diff'].dropna().plot()
+
+train['open_diff'] = train['open'] - train['open'].shift(1)
+train['open'].dropna().plot()
 ```
 
 
 ### OUTPUT:
 
-![exp1b-img1](https://github.com/user-attachments/assets/42c81afe-cf76-464c-8a27-2da05cc0f916)
-
-![exp1b-img2](https://github.com/user-attachments/assets/e412e94e-8430-437d-8d69-a359a56ac6f1)
+![exp1b-img1](https://github.com/user-attachments/assets/c3ba00ae-2245-4f8d-a744-83cb531d90d0)
+![exp1b-img2](https://github.com/user-attachments/assets/ef967ba1-aba5-4478-ab0b-0a842cc9d698)
 
 
 REGULAR DIFFERENCING:
 
-![exp1b-img3](https://github.com/user-attachments/assets/d0a1290c-acfd-4c98-8d1c-03cbdb8c997a)
-
+![Screenshot 2024-09-09 111331](https://github.com/user-attachments/assets/1e243fb1-2706-4354-9924-9cff1dde0758)
 
 SEASONAL ADJUSTMENT:
 
-![exp1b-img4](https://github.com/user-attachments/assets/fc6af112-68f6-4d1d-909a-d596208b4b9d)
+![exp1b-img3](https://github.com/user-attachments/assets/2d9c86d8-9fab-46fc-8fe1-68bd8fa105f2)
 
 
 LOG TRANSFORMATION:
 
-![exp1b-img5](https://github.com/user-attachments/assets/86270cdf-e9e9-482d-ab99-d3699785012d)
+![exp1b-img4](https://github.com/user-attachments/assets/9d9545b4-d504-4f31-b31f-b4c92686317d)
 
 COMBINED GRAPH:
+![exp1b-img5](https://github.com/user-attachments/assets/18cf011b-ece9-4eec-abf4-bad00cfd2dd5)
 
-![exp1b-img6](https://github.com/user-attachments/assets/f79b1ce3-13eb-4231-9d19-1a16ea696211)
 
 ### RESULT:
-Thus we have created the python code for the conversion of non stationary to stationary data on international airline passenger
-data.
+Thus we have created the python code for the conversion of non stationary to stationary data on tesla stock prediction.
